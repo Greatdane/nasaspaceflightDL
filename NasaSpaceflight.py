@@ -15,15 +15,13 @@ URL = "https://forum.nasaspaceflight.com/index.php?topic="
 complete_URL = URL + topic
 print(complete_URL)
 
-# args = ['wget', '-e', 'robots=off', '-r', '-k', '-np','--accept-regex', 'action=dlattach', '--content-disposition', '-U', 'Mozilla', '-w', '3' , complete_URL]
-
 for page in range(page_start-1, pages):
     print("Downloading page " + str(page+1))
     # make dir
     dir = str(page+1).zfill(len(str(pages)))
     os.mkdir(dir)
     os.chdir(dir)
-    counter = page * 20 
+    counter = page * 20
     # images
     args = ['wget', '-e', 'robots=off', '-r', '-k', '-np','--accept-regex', 'action=dlattach', '--content-disposition', '-U', 'Mozilla', '-w', '2' , complete_URL+"."+str(counter)]
     print(complete_URL+"."+str(counter))
@@ -36,7 +34,3 @@ for page in range(page_start-1, pages):
     stdout, stderr = process2.communicate()
     print("HTML downloaded")
     os.chdir('..')
-
-
-# process = subprocess.Popen(args, stdout=subprocess.PIPE)
-# stdout, stderr = process.communicate()
